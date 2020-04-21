@@ -1,13 +1,13 @@
 from Apirequest import bazaardatabuy
 from Apirequest import bazaardatasell
-from Apirequest import chooser
+from Apirequest import product
 import decimal
 
 """-------------------------------------------------------------------------"""
 
 ##### Starting variables ####
 
-print("Miglior item: ", chooser())
+print("Miglior item: ", product)
 budget = input("inserisci budget: ")
 bazaarbuyin = input("inserisci spesa unità: ")
 bazaarsellin = input("inserisci valore vendita unità: ")
@@ -73,4 +73,5 @@ def printbazaar():
 printbazaar()
 
 #### Printer ####
+
 
