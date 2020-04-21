@@ -73,36 +73,33 @@ perc = [
 
 #### Best chooser ####
 
-def chooser():
-    if(max(perc)==perc[0]):
-        product = "E-Gold"
-        bestproduct = golddata
-    elif(max(perc)==perc[1]):
-        product = "E-B-Potato"
-        bestproduct = potatpdata
-    elif(max(perc)==perc[2]):
-        product = "E-Sugar-Cane"
-        bestproduct = sugarcanedata
-    elif(max(perc)==perc[3]):
-        product = "E-Glowstone-Dust"
-        bestproduct = glowstonedata
-    elif(max(perc)==perc[4]):
-        product = "E-Catalyst"
-        bestproduct = catalystdata
-    elif(max(perc)==perc[5]):
-        product = "E-Redstone-Lamp"
-        bestproduct = lampdata
-    elif(max(perc)==perc[6]):
-        product = "E-Rotten-Flesh"
-        bestproduct = zombiedata
-    elif(max(perc)==perc[7]):
-        product = "E-Leather"
-        bestproduct = leatherdata
-    elif(max(perc)==perc[8]):
-        product = "E-Lapis"
-        bestproduct = lapisdata
-    return product
-bestproduct = chooser()
+if(max(perc)==perc[0]):
+    product = "E-Gold"
+    bestproduct = golddata
+elif(max(perc)==perc[1]):
+    product = "E-B-Potato"
+    bestproduct = potatodata
+elif(max(perc)==perc[2]):
+    product = "E-Sugar-Cane"
+    bestproduct = sugarcanedata
+elif(max(perc)==perc[3]):
+    product = "E-Glowstone-Dust"
+    bestproduct = glowstonedata
+elif(max(perc)==perc[4]):
+    product = "E-Catalyst"
+    bestproduct = catalystdata
+elif(max(perc)==perc[5]):
+    product = "E-Redstone-Lamp"
+    bestproduct = lampdata
+elif(max(perc)==perc[6]):
+    product = "E-Rotten-Flesh"
+    bestproduct = zombiedata
+elif(max(perc)==perc[7]):
+    product = "E-Leather"
+    bestproduct = leatherdata
+elif(max(perc)==perc[8]):
+    product = "E-Lapis"
+    bestproduct = lapisdata
 
 #### Best chooser ####
 
@@ -112,11 +109,11 @@ bestproduct = chooser()
 
 def bazaardatabuy():
     bazaarHighetsPriceBuy = bestproduct["product_info"]["buy_summary"][0]["pricePerUnit"]
-    return bestproductbuy
+    return bazaarHighetsPriceBuy
 
 def bazaardatasell():
     bazaarLowestPriceSell = bestproduct["product_info"]["sell_summary"][0]["pricePerUnit"]
-    return bestproductsell
+    return bazaarLowestPriceSell
 
 #### Bazaar item data ####
 
