@@ -1,16 +1,20 @@
 from Apirequest import bazaardatabuy
 from Apirequest import bazaardatasell
+from Apirequest import ProfitList
 from Apirequest import product
+from Apirequest import perc
 import decimal
 
 """-------------------------------------------------------------------------"""
 
 ##### Starting variables ####
 
-print("Miglior item: ", product)
-budget = input("inserisci budget: ")
-bazaarbuyin = input("inserisci spesa unità: ")
-bazaarsellin = input("inserisci valore vendita unità: ")
+budget = input("Enter budget: ")
+if(budget == "0"):
+    budget = 10**6
+print("\n")
+bazaarbuyin = input("Enter buy price: ")
+bazaarsellin = input("Enter sell price: ")   
 if(bazaarbuyin == "0"):
     bazaarbuy = float(bazaardatabuy())+0.1
 else:
@@ -56,21 +60,22 @@ decimalminvendita = decimal.Decimal('%.1f' % (minvendita))
 
 def printbazaar():
     print("\n")
-    print("Spesa per unità: ", decimalbuy,"\n")
-    print("Valore vendita per unità: ", decimalsell,"\n")
+    if(bazaarbuyin == "0" or bazaarsellin == "0"):
+        print("buy price: ", decimalbuy)
+        print("sell price: ", decimalsell,"\n")
     if(quantità>1024):
         print("quantità troppo elevata, ci potrebbe volere troppo per riceverlo","\n")
     print("quantità per arrivare a", budget,": ", quantità,"\n")
     print("minimo prezzo per vendere: ", decimalminvendita,"\n")
-    print("tasse: ", decimaltasse,"\n")
-    print("spesa totale: ", float(decimalbuytot),"\n")
+    print("taxes: ", decimaltasse,"\n")
+    print("total buy: ", float(decimalbuytot),"\n")
     if(bazaarguadagno > 0):
         print("guadagno totale: ", decimalselltot,"\n")
         print("guadagno effettivo: ", decimalbazaarguadagno,"\n")
-        print("percentuale di guadagno rispetto al budget: ", decimalpercentuale,"%")
     else:
         print("not stonks (", decimalbazaarguadagno,")","\n") 
 printbazaar()
+print("percentuale di guadagno rispetto al budget: ", decimalpercentuale,"%")
 
 #### Printer ####
 
