@@ -1,20 +1,20 @@
-from Apirequest import bazaardatabuy
-from Apirequest import bazaardatasell
-from Apirequest import ProfitList
-from Apirequest import product
-from Apirequest import perc
+from Apirequest import *
 import decimal
 
 """-------------------------------------------------------------------------"""
 
 ##### Starting variables ####
 
+#while(True):
 budget = input("Enter budget: ")
-if(budget == "0"):
-    budget = 10**6
+if(budget == "0"):  
+    budget = 10**7
+    bazaarbuyin = "0"
+    bazaarsellin = "0"
+else:
+    bazaarbuyin = input("Enter buy price: ")
+    bazaarsellin = input("Enter sell price: ") 
 print("\n")
-bazaarbuyin = input("Enter buy price: ")
-bazaarsellin = input("Enter sell price: ")   
 if(bazaarbuyin == "0"):
     bazaarbuy = float(bazaardatabuy())+0.1
 else:
@@ -59,7 +59,6 @@ decimalminvendita = decimal.Decimal('%.1f' % (minvendita))
 #### Printer ####
 
 def printbazaar():
-    print("\n")
     if(bazaarbuyin == "0" or bazaarsellin == "0"):
         print("buy price: ", decimalbuy)
         print("sell price: ", decimalsell,"\n")
@@ -76,7 +75,7 @@ def printbazaar():
         print("not stonks (", decimalbazaarguadagno,")","\n") 
 printbazaar()
 print("percentuale di guadagno rispetto al budget: ", decimalpercentuale,"%")
+#input()
 
 #### Printer ####
-
 
