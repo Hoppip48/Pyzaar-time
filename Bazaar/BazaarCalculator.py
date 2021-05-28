@@ -19,44 +19,30 @@ while(True):
     jerrys = ["Jerry green","Jerry blue","Jerry purple","Jerry gold"]
     supers = ["Baked Potato","Golden Carrot","Sugar Cane","Coal Block","Gold Block","Lapis Block","Redstone Block","Glowstone Block","Packed Ice","Blaze Rod","Redstone Lamp","Compactor","Summoning Eye","Catalyst","White gift","Purple Candy","Grilled Pork","Refined Mineral","RECOMBOBULATOR","Booster Cookie","Ticket"]     
     drops = ["Rotten Flesh","Bone","String","Ender Pearl","Blaze Powder","Griffon","Claw","Shark Fin","White shark tooth"]
-    crops = ["Carrot","Potato","Pumpkin","Sugar","Leather","Rabbit Foot","Rabbit Hide","Pork","Nether Wart","Wheat"]
+    crops = ["Carrot","Potato","Pumpkin","Sugar","Leather","Rabbit Foot","Rabbit Hide","Pork","Hay Bale","Mutant Wart"]
     slayer = ["Viscera","Silk","Wolf Tooth","Golden Tooth"]
     ### Empty ###
     products = []
     itemsdata = []
-    best = []
     perc = []
     buy = []
-    sell = []   
-    woodbuy = []
-    woodsell = []
+    sell = []
+    #perclist = ["wood"]["ores"]["jerry"]["super"]["drop"]["crop"]["slayer"] hihihi cocoriti im giorgio cappello di paglia https://www.youtube.com/watch?v=E9FvB_TOGUg
     woodlist = []        
-    orebuy = []
-    oresell = []
     orelist = []
-    jerrybuy = []
-    jerrysell = []
-    jerrylist = []        
-    superbuy = []
-    supersell = []
+    jerrylist = []       
     superlist = []
-    dropbuy = []
-    dropsell = []
     droplist = []
-    cropbuy = []
-    cropsell = []
     croplist = []
-    slayerbuy = []
-    slayersell = []
     slayerlist = []
     ### Empty ###
     #### Lists iniziaalizator ####
     #### Best Wood ####
     print("\n \n \t \t \t Calculating Best Wood Type...")
     for i in range(len(wood)):
-        woodbuy.append(json["products"][woodjson[i]]["sell_summary"][0]["pricePerUnit"])
-        woodsell.append(json["products"][woodjson[i]]["buy_summary"][0]["pricePerUnit"])
-        woodlist.append((float(woodsell[i])-float(woodbuy[i])-float(woodsell[i])/100)/float(woodbuy[i])*100)
+        theybuy = json["products"][woodjson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][woodjson[i]]["buy_summary"][0]["pricePerUnit"]
+        woodlist.append(((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy))*100)
     for i in range(len(wood)):
         for j in range(len(wood)):
             if(woodlist[i]>woodlist[j]):
@@ -75,9 +61,9 @@ while(True):
     ####  Best Ores #####
     print("\n \n \t \t \t  Calculating Best 4 Ores...")
     for i in range(len(ores)):
-        orebuy.append(json["products"][orejson[i]]["sell_summary"][0]["pricePerUnit"])
-        oresell.append(json["products"][orejson[i]]["buy_summary"][0]["pricePerUnit"])
-        orelist.append((float(oresell[i])-float(orebuy[i])-float(oresell[i])/100)/float(orebuy[i])*100) 
+        theybuy = json["products"][orejson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][orejson[i]]["buy_summary"][0]["pricePerUnit"]
+        orelist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100) 
     for i in range(len(ores)):
         for j in range(len(ores)):
             if(orelist[i]>orelist[j]):
@@ -97,9 +83,9 @@ while(True):
     #### Best Jerry ####
     print("\n \n \t \t \tCalculating Best jerry...")
     for i in range(len(jerrys)):
-        jerrybuy.append(json["products"][jerryjson[i]]["sell_summary"][0]["pricePerUnit"])
-        jerrysell.append(json["products"][jerryjson[i]]["buy_summary"][0]["pricePerUnit"])
-        jerrylist.append((float(jerrysell[i])-float(jerrybuy[i])-float(jerrysell[i])/100)/float(jerrybuy[i])*100)
+        theybuy = json["products"][jerryjson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][jerryjson[i]]["buy_summary"][0]["pricePerUnit"]
+        jerrylist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
     for i in range(len(jerrys)):
         for j in range(len(jerrys)):
             if(jerrylist[i]>jerrylist[j]):
@@ -113,14 +99,14 @@ while(True):
                 jerrys[j] = jerrys[i]
                 jerrys[i] = ez
     itemsdata.append(jerryjson[0])
-    products.append(jerrys[0])  
+    products.append(jerrys[0])
     #### Best Jerry ####
     ### Best Super Enchanted ####
     print("\n \n \t \t \tCalculating Best 4 Other Items...")
     for i in range(len(supers)):
-        superbuy.append(json["products"][superjson[i]]["sell_summary"][0]["pricePerUnit"])
-        supersell.append(json["products"][superjson[i]]["buy_summary"][0]["pricePerUnit"])
-        superlist.append((float(supersell[i])-float(superbuy[i])-float(supersell[i])/100)/float(superbuy[i])*100)
+        theybuy = json["products"][superjson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][superjson[i]]["buy_summary"][0]["pricePerUnit"]
+        superlist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
     for i in range(len(supers)):
         for j in range(len(supers)):
             if(superlist[i]>superlist[j]):
@@ -140,9 +126,9 @@ while(True):
     ### Best Drops ####
     print("\n \n \t \t \t  Calculating Best 2 Drops...")
     for i in range(len(drops)):
-        dropbuy.append(json["products"][dropjson[i]]["sell_summary"][0]["pricePerUnit"])
-        dropsell.append(json["products"][dropjson[i]]["buy_summary"][0]["pricePerUnit"])
-        droplist.append((float(dropsell[i])-float(dropbuy[i])-float(dropsell[i])/100)/float(dropbuy[i])*100)
+        theybuy = json["products"][dropjson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][dropjson[i]]["buy_summary"][0]["pricePerUnit"]
+        droplist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
     for i in range(len(drops)):
         for j in range(len(drops)):
             if(droplist[i]>droplist[j]):
@@ -162,9 +148,9 @@ while(True):
     #### Best Crops ####
     print("\n \n \t \t \t  Calculating Best 2 Crops...")
     for i in range(len(crops)):
-        cropbuy.append(json["products"][cropjson[i]]["sell_summary"][0]["pricePerUnit"])
-        cropsell.append(json["products"][cropjson[i]]["buy_summary"][0]["pricePerUnit"])
-        croplist.append((float(cropsell[i])-float(cropbuy[i])-float(cropsell[i])/100)/float(cropbuy[i])*100)
+        theybuy = json["products"][cropjson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][cropjson[i]]["buy_summary"][0]["pricePerUnit"]
+        croplist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
     for i in range(len(crops)):
         for j in range(len(crops)):
             if(croplist[i]>croplist[j]):
@@ -184,9 +170,9 @@ while(True):
     #### Best Slayer ####
     print("\n \n \t \t \t Calculating Best Slayer Drop... \n \n")
     for i in range(len(slayer)):
-        slayerbuy.append(json["products"][slayerjson[i]]["sell_summary"][0]["pricePerUnit"])
-        slayersell.append(json["products"][slayerjson[i]]["buy_summary"][0]["pricePerUnit"])
-        slayerlist.append((float(slayersell[i])-float(slayerbuy[i])-float(slayersell[i])/100)/float(slayerbuy[i])*100)
+        theybuy = json["products"][slayerjson[i]]["sell_summary"][0]["pricePerUnit"]
+        isell = json["products"][slayerjson[i]]["buy_summary"][0]["pricePerUnit"]
+        slayerlist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
     for i in range(len(slayer)):
         for j in range(len(slayer)):
             if(slayerlist[i]>slayerlist[j]):
@@ -209,8 +195,8 @@ while(True):
     #### Bazaar data grabber ####
     #### Best inizializator ####
     for i in range(len(itemsdata)):
-        best.append(float(sell[i])-float(buy[i])-float(sell[i])/100)
-        perc.append(float(best[i])/float(buy[i])*100)
+        ez = float(sell[i])-float(buy[i])-float(sell[i])/100
+        perc.append(float(ez)/float(buy[i])*100)
     #### Best inizializator ####
     #### Best chooser ####
     for i in range(len(itemsdata)):
@@ -241,15 +227,16 @@ while(True):
             arraystringlist += str(i+1)
             arraystringlist += ") "
             arraystringlist += str(products[i])
-            arraystringlist += " : "
+            arraystringlist += ": "
             arraystringlist += "buy("
             arraystringlist += str(buy[i])
-            arraystringlist += ") : "
+            arraystringlist += ") | "
             arraystringlist += "sell("
             arraystringlist += str(sell[i])
-            arraystringlist += ") : "
+            arraystringlist += ") | "
             arraystringlist += str(perc[i])
             arraystringlist += "% \n \n"
+            #arraystringlist +=  popolarità ,"\n \n"
         return arraystringlist
     print(ProfitList())
     #### Price List ####
@@ -330,7 +317,7 @@ while(True):
     #### Printer ####
     def printbazaar():
         if(bazaarbuyin == "0" or bazaarsellin == "0"):
-            print("buy price: ", decimalbuy)
+            print("\nbuy price: ", decimalbuy)
             print("sell price: ", decimalsell,"\n")
         if(int(quantità)>1024):
             print("quantità troppo elevata, ci potrebbe volere troppo per riceverlo","\n")
