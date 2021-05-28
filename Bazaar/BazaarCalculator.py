@@ -31,22 +31,18 @@ while(True):
     woodbuy = []
     woodsell = []
     woodlist = []        
-    bestore = []
     orebuy = []
     oresell = []
     orelist = []
     jerrybuy = []
     jerrysell = []
     jerrylist = []        
-    bestsuper = []
     superbuy = []
     supersell = []
     superlist = []
-    bestdrop = []
     dropbuy = []
     dropsell = []
     droplist = []
-    bestcrop = []
     cropbuy = []
     cropsell = []
     croplist = []
@@ -73,7 +69,7 @@ while(True):
                 ez = wood[j]
                 wood[j] = wood[i]
                 wood[i] = ez
-    bestwood = woodjson[0]
+    itemsdata.append(woodjson[0])
     products.append(wood[0])
     #### Best Wood ###
     ####  Best Ores #####
@@ -95,7 +91,7 @@ while(True):
                 orejson[i] = orejson[j]
                 orejson[j] = y
     for i in range(4):
-        bestore.append(orejson[i])
+        itemsdata.append(orejson[i])
         products.append(ores[i])
     #### Best Ores #####
     #### Best Jerry ####
@@ -116,7 +112,7 @@ while(True):
                 ez = jerrys[j]
                 jerrys[j] = jerrys[i]
                 jerrys[i] = ez
-    bestjerry = jerryjson[0]
+    itemsdata.append(jerryjson[0])
     products.append(jerrys[0])  
     #### Best Jerry ####
     ### Best Super Enchanted ####
@@ -138,7 +134,7 @@ while(True):
                 superjson[i] = superjson[j]
                 superjson[j] = y
     for i in range(4):
-        bestsuper.append(superjson[i])
+        itemsdata.append(superjson[i])
         products.append(supers[i])
     #### Best Super Enchanted ####
     ### Best Drops ####
@@ -160,7 +156,7 @@ while(True):
                 dropjson[i] = dropjson[j]
                 dropjson[j] = y
     for i in range(2):
-        bestdrop.append(dropjson[i])
+        itemsdata.append(dropjson[i])
         products.append(drops[i])
     #### Best Drops ####
     #### Best Crops ####
@@ -182,11 +178,11 @@ while(True):
                 cropjson[i] = cropjson[j]
                 cropjson[j] = y
     for i in range(2):
-        bestcrop.append(cropjson[i])
+        itemsdata.append(cropjson[i])
         products.append(crops[i])
     #### Best Crops ####    
     #### Best Slayer ####
-    print("\n \n \t \t \t Calculating Best Slayer Drop...")
+    print("\n \n \t \t \t Calculating Best Slayer Drop... \n \n")
     for i in range(len(slayer)):
         slayerbuy.append(json["products"][slayerjson[i]]["sell_summary"][0]["pricePerUnit"])
         slayersell.append(json["products"][slayerjson[i]]["buy_summary"][0]["pricePerUnit"])
@@ -203,27 +199,9 @@ while(True):
                 y = slayerjson[i]
                 slayerjson[i] = slayerjson[j]
                 slayerjson[j] = y
-    bestslayer = slayerjson[0]
+    itemsdata.append(slayerjson[0])
     products.append(slayer[0])
     #### Best Slayer ####
-    #### Api requester ####
-    print("\n \n \t \t \t  Extracting Data From Hypixel API... \n \n")
-    itemsdata.append(bestwood)
-    itemsdata.append(bestore[0])
-    itemsdata.append(bestore[1])
-    itemsdata.append(bestore[2])
-    itemsdata.append(bestore[3])
-    itemsdata.append(bestjerry)
-    itemsdata.append(bestsuper[0])
-    itemsdata.append(bestsuper[1])
-    itemsdata.append(bestsuper[2])
-    itemsdata.append(bestsuper[3])
-    itemsdata.append(bestdrop[0])
-    itemsdata.append(bestdrop[1])
-    itemsdata.append(bestcrop[0])
-    itemsdata.append(bestcrop[1])
-    itemsdata.append(bestslayer)
-    #### API requester ####
     #### Bazaar data grabber ####
     for i in range(len(itemsdata)):
         buy.append(json["products"][itemsdata[i]]["sell_summary"][0]["pricePerUnit"])
