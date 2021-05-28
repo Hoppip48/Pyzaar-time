@@ -2,286 +2,237 @@ import requests
 import decimal
     
 
+
 while(True):
     print("\n \t \t \t \t Attendere...")
     #### Lists inizializator ####
-    products = ["Wood","Ore1","Ore2","Ore3","Ore4","Jerry","Super1","Super2","Super3","Super4","Mob1","Mob2","Crop1","Crop2","Slayer"]
-    itemsdata = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
-    percperc = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
-    best = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-    perc = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-    buy = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-    sell = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+    json = requests.get("https://api.hypixel.net/skyblock/bazaar?key=a7c61bba-d7ef-4049-8f42-bc53d6b8d747").json()
+    woodjson = ["ENCHANTED_OAK_LOG","ENCHANTED_SPRUCE_LOG","ENCHANTED_BIRCH_LOG","ENCHANTED_DARK_OAK_LOG","ENCHANTED_JUNGLE_LOG","ENCHANTED_ACACIA_LOG"]
+    orejson = ["ENCHANTED_COBBLESTONE","ENCHANTED_COAL","ENCHANTED_IRON","ENCHANTED_GOLD","ENCHANTED_REDSTONE","ENCHANTED_LAPIS_LAZULI","ENCHANTED_DIAMOND","ENCHANTED_EMERALD","ENCHANTED_OBSIDIAN","ENCHANTED_FLINT","ENCHANTED_GLOWSTONE_DUST","ENCHANTED_ICE","ENCHANTED_QUARTZ","ENCHANTED_SNOW_BLOCK","ENCHANTED_MITHRIL","STARFALL","REFINED_TITANIUM"]
+    jerryjson = ["JERRY_BOX_GREEN","JERRY_BOX_BLUE","JERRY_BOX_PURPLE","JERRY_BOX_GOLDEN"]
+    superjson = ["ENCHANTED_BAKED_POTATO","ENCHANTED_GOLDEN_CARROT","ENCHANTED_SUGAR_CANE","ENCHANTED_COAL_BLOCK","ENCHANTED_GOLD_BLOCK","ENCHANTED_LAPIS_LAZULI_BLOCK","ENCHANTED_REDSTONE_BLOCK","ENCHANTED_GLOWSTONE","ENCHANTED_PACKED_ICE","ENCHANTED_BLAZE_ROD","ENCHANTED_REDSTONE_LAMP","SUPER_COMPACTOR_3000","SUMMONING_EYE","CATALYST","WHITE_GIFT","PURPLE_CANDY","ENCHANTED_GRILLED_PORK","REFINED_MINERAL","RECOMBOBULATOR_3000","BOOSTER_COOKIE","JACOBS_TICKET"]
+    dropjson = ["ENCHANTED_ROTTEN_FLESH","ENCHANTED_BONE","ENCHANTED_STRING","ENCHANTED_ENDER_PEARL","ENCHANTED_BLAZE_POWDER","GRIFFIN_FEATHER","ENCHANTED_ANCIENT_CLAW","ENCHANTED_SHARK_FIN","GREAT_WHITE_SHARK_TOOTH"]
+    cropjson = ["ENCHANTED_CARROT","ENCHANTED_POTATO","ENCHANTED_PUMPKIN","ENCHANTED_SUGAR","ENCHANTED_LEATHER","ENCHANTED_RABBIT_FOOT","ENCHANTED_RABBIT_HIDE","ENCHANTED_PORK","TIGHTLY_TIED_HAY_BALE","MUTANT_NETHER_STALK"]
+    slayerjson = ["REVENANT_VISCERA","TARANTULA_SILK","WOLF_TOOTH","GOLDEN_TOOTH"]
+    wood = ["Oak","Spruce","Birch","Dark oak","Jungle","Acacia"]
+    ores = ["Cobblestone","Coal","Iron","Gold","Redstone","Lapis","Diamond","Emerald","Obsidian","Flint","Glowstone","Ice","Quartz","Snow","Mithril","Starfall","Titanium"]
+    jerrys = ["Jerry green","Jerry blue","Jerry purple","Jerry gold"]
+    supers = ["Baked Potato","Golden Carrot","Sugar Cane","Coal Block","Gold Block","Lapis Block","Redstone Block","Glowstone Block","Packed Ice","Blaze Rod","Redstone Lamp","Compactor","Summoning Eye","Catalyst","White gift","Purple Candy","Grilled Pork","Refined Mineral","RECOMBOBULATOR","Booster Cookie","Ticket"]     
+    drops = ["Rotten Flesh","Bone","String","Ender Pearl","Blaze Powder","Griffon","Claw","Shark Fin","White shark tooth"]
+    crops = ["Carrot","Potato","Pumpkin","Sugar","Leather","Rabbit Foot","Rabbit Hide","Pork","Nether Wart","Wheat"]
+    slayer = ["Viscera","Silk","Wolf Tooth","Golden Tooth"]
+    ### Empty ###
+    products = []
+    itemsdata = []
+    best = []
+    perc = []
+    buy = []
+    sell = []   
+    woodbuy = []
+    woodsell = []
+    woodlist = []        
+    bestore = []
+    orebuy = []
+    oresell = []
+    orelist = []
+    jerrybuy = []
+    jerrysell = []
+    jerrylist = []        
+    bestsuper = []
+    superbuy = []
+    supersell = []
+    superlist = []
+    bestdrop = []
+    dropbuy = []
+    dropsell = []
+    droplist = []
+    bestcrop = []
+    cropbuy = []
+    cropsell = []
+    croplist = []
+    slayerbuy = []
+    slayersell = []
+    slayerlist = []
+    ### Empty ###
     #### Lists iniziaalizator ####
     #### Best Wood ####
     print("\n \n \t \t \t Calculating Best Wood Type...")
-    wood = ["0","1","2","3","4","5"]
-    woodtypes = ["Oak","Spruce","Birch","Dark oak","Jungle","Acacia"]
-    woodbuy = [0,1,2,3,4,5]
-    woodsell = [0,1,2,3,4,5]
-    woodlist = [0,1,2,3,4,5]
-    wood[0] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_OAK_LOG").json()
-    wood[1] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_SPRUCE_LOG").json()
-    wood[2] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_BIRCH_LOG").json()
-    wood[3] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_DARK_OAK_LOG").json()
-    wood[4] =  requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_JUNGLE_LOG").json()
-    wood[5] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_ACACIA_LOG").json()
     for i in range(len(wood)):
-        woodbuy[i] = wood[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        woodsell[i] = wood[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        woodlist[i] = (float(woodsell[i])-float(woodbuy[i])-float(woodsell[i])/100)/float(woodbuy[i])*100
+        woodbuy.append(json["products"][woodjson[i]]["sell_summary"][0]["pricePerUnit"])
+        woodsell.append(json["products"][woodjson[i]]["buy_summary"][0]["pricePerUnit"])
+        woodlist.append((float(woodsell[i])-float(woodbuy[i])-float(woodsell[i])/100)/float(woodbuy[i])*100)
     for i in range(len(wood)):
         for j in range(len(wood)):
-            if(woodlist[i]<woodlist[j]):
-                bestwood = wood[j]
-                products[0] = woodtypes[j]
-    #### Best Wood ####
-    #### Best Slayer ####
-    print("\n \n \t \t \t Calculating Best Slayer Drop...")
-    slayer = ["0","1","2","3","4","5"]
-    slayertypes = ["Revenant Flesh","Viscera","Tarantula Web","Silk","Wolf Tooth","Golden Tooth"]
-    slayerbuy = [0,1,2,3,4,5]
-    slayersell = [0,1,2,3,4,5]
-    slayerlist = [0,1,2,3,4,5]
-    slayer[0] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=REVENANT_FLESH").json()
-    slayer[1] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=REVENANT_VISCERA").json()
-    slayer[2] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=TARANTULA_WEB").json()
-    slayer[3] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=TARANTULA_SILK").json()
-    slayer[4] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=WOLF_TOOTH").json()
-    slayer[5] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=GOLDEN_TOOTH").json()
-    for i in range(len(slayer)):
-        slayerbuy[i] = slayer[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        slayersell[i] = slayer[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        slayerlist[i] = (float(slayersell[i])-float(slayerbuy[i])-float(slayersell[i])/100)/float(slayerbuy[i])*100
-    for i in range(len(slayer)):
-        for j in range(len(slayer)):
-            if(slayerlist[i]<slayerlist[j]):
-                bestslayer = slayer[j]
-                products[14] = slayertypes[j]
-    #### Best Slayer ####
+            if(woodlist[i]>woodlist[j]):
+                ez = woodlist[j]
+                woodlist[j] = woodlist[i]
+                woodlist[i] = ez
+                ez = woodjson[j]
+                woodjson[j] = woodjson[i]
+                woodjson[i] = ez
+                ez = wood[j]
+                wood[j] = wood[i]
+                wood[i] = ez
+    bestwood = woodjson[0]
+    products.append(wood[0])
+    #### Best Wood ###
     ####  Best Ores #####
     print("\n \n \t \t \t  Calculating Best 4 Ores...")
-    Ores = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"]
-    Oretypes = ["Cobblestone","Coal","Iron","Gold","Redstone","Lapis","Diamond","Emerald","Obsidian","Flint","Glowstone","Ice","Quartz","Snow","Mithril","Starfall","Titanium"]
-    bestore = ["0","1","2","3"]
-    orebuy = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-    oresell = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-    Orelist = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-    Ores[0] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_COBBLESTONE").json()
-    Ores[1] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_COAL").json()
-    Ores[2] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_IRON").json()
-    Ores[3] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_GOLD").json()
-    Ores[4] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_REDSTONE").json()
-    Ores[5] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_LAPIS_LAZULI").json()
-    Ores[6] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_DIAMOND").json()
-    Ores[7] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_EMERALD").json()
-    Ores[8] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_OBSIDIAN").json()
-    Ores[9] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_FLINT").json()
-    Ores[10] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_GLOWSTONE_DUST").json()
-    Ores[11] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_ICE").json()
-    Ores[12] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_QUARTZ").json()
-    Ores[13] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_SNOW_BLOCK").json()
-    Ores[14] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=REFINED_MITHRIL").json()
-    Ores[15] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=STARFALL").json()
-    Ores[16] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=REFINED_TITANIUM").json()
-    for i in range(len(Ores)):
-        orebuy[i] = Ores[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        oresell[i] = Ores[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        Orelist[i] = (float(oresell[i])-float(orebuy[i])-float(oresell[i])/100)/float(orebuy[i])*100
-    for i in range(len(Ores)):
-        for j in range(len(Ores)):
-            if(Orelist[i]>Orelist[j]):
-                cumdemon = Ores[i]
-                Ores[i] = Ores[j]
-                Ores[j] = cumdemon
-                x = Orelist[i]
-                Orelist[i] = Orelist[j]
-                Orelist[j] = x
-                y = Oretypes[i]
-                Oretypes[i] = Oretypes[j]
-                Oretypes[j] = y
-                z = orebuy[i]
-                orebuy[i] = orebuy[j]
-                orebuy[j] = z
-                q = oresell[i]
-                oresell[i] = oresell[j]
-                oresell[j] = q
-    for i in range(len(bestore)):
-        bestore[i]=Ores[i]
-        products[i+1]=Oretypes[i]
+    for i in range(len(ores)):
+        orebuy.append(json["products"][orejson[i]]["sell_summary"][0]["pricePerUnit"])
+        oresell.append(json["products"][orejson[i]]["buy_summary"][0]["pricePerUnit"])
+        orelist.append((float(oresell[i])-float(orebuy[i])-float(oresell[i])/100)/float(orebuy[i])*100) 
+    for i in range(len(ores)):
+        for j in range(len(ores)):
+            if(orelist[i]>orelist[j]):
+                cumdemon = ores[i]
+                ores[i] = ores[j]
+                ores[j] = cumdemon
+                x = orelist[i]
+                orelist[i] = orelist[j]
+                orelist[j] = x
+                y = orejson[i]
+                orejson[i] = orejson[j]
+                orejson[j] = y
+    for i in range(4):
+        bestore.append(orejson[i])
+        products.append(ores[i])
     #### Best Ores #####
-    #### Best Crops ####
-    print("\n \n \t \t \t  Calculating Best 2 Crops...")
-    Crops = ["0","1","2","3","4","5","6","7","8","9"]
-    Croptypes = ["Carrot","Potato","Pumpkin","Sugar","Leather","Rabbit Foot","Rabbit Hide","Pork","Nether Wart","Wheat"]
-    bestcrop = ["0","1"]
-    cropbuy = [0,1,2,3,4,5,6,7,8,9]
-    cropsell = [0,1,2,3,4,5,6,7,8,9]
-    croplist = [0,1,2,3,4,5,6,7,8,9]
-    Crops[0] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_CARROT").json()  
-    Crops[1] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_POTATO").json()
-    Crops[2] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=POLISHED_PUMPKIN").json()
-    Crops[3] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_SUGAR").json()
-    Crops[4] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_LEATHER").json()    
-    Crops[5] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_RABBIT_FOOT").json()
-    Crops[6] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_RABBIT_HIDE").json()
-    Crops[7] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_PORK").json()
-    Crops[8] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=TIGHTLY_TIED_HAY_BALE").json()
-    Crops[9] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=MUTANT_NETHER_STALK").json()
-    for i in range(len(Crops)):
-        cropbuy[i] = Crops[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        cropsell[i] = Crops[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        croplist[i] = (float(cropsell[i])-float(cropbuy[i])-float(cropsell[i])/100)/float(cropbuy[i])*100
-    for i in range(len(Crops)):
-        for j in range(len(Crops)):
-            if(croplist[i]>croplist[j]):
-                cumdemon = Crops[i]
-                Crops[i] = Crops[j]
-                Crops[j] = cumdemon
-                x = croplist[i]
-                croplist[i] = croplist[j]
-                croplist[j] = x
-                y = Croptypes[i]
-                Croptypes[i] = Croptypes[j]
-                Croptypes[j] = y
-                z = cropbuy[i]
-                cropbuy[i] = cropbuy[j]
-                cropbuy[j] = z
-                q = cropsell[i]
-                cropsell[i] = cropsell[j]
-                cropsell[j] = q
-    for i in range(len(bestcrop)):
-        bestcrop[i]=Crops[i]
-        products[i+12]=Croptypes[i]
-    #### Best Crops ####    
-    ### Best Drops ####
-    print("\n \n \t \t \t  Calculating Best 2 Drops...")
-    Drops = ["0","1","2","3","4","5","6","7","8"]
-    Droptypes = ["Rotten Flesh","Bone","String","Ender Pearl","Blaze Powder","Griffon","Claw","Shark Fin","White shark tooth"]
-    bestdrop = ["0","1"]
-    dropbuy = [0,1,2,3,4,5,6,7,8]
-    dropsell = [0,1,2,3,4,5,6,7,8]
-    droplist = [0,1,2,3,4,5,6,7,8]
-    Drops[0] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_ROTTEN_FLESH").json()  
-    Drops[1] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_BONE").json()
-    Drops[2] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_STRING").json()
-    Drops[3] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_ENDER_PEARL").json() 
-    Drops[4] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_BLAZE_POWDER").json()
-    Drops[5] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=GRIFFIN_FEATHER").json()
-    Drops[6] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_ANCIENT_CLAW").json()
-    Drops[7] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=ENCHANTED_SHARK_FIN").json()
-    Drops[8] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId=GREAT_WHITE_SHARK_TOOTH").json()
-    for i in range(len(Drops)):
-        dropbuy[i] = Drops[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        dropsell[i] = Drops[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        droplist[i] = (float(dropsell[i])-float(dropbuy[i])-float(dropsell[i])/100)/float(dropbuy[i])*100
-    for i in range(len(Drops)):
-        for j in range(len(Drops)):
-            if(droplist[i]>droplist[j]):
-                cumdemon = Drops[i]
-                Drops[i] = Drops[j]
-                Drops[j] = cumdemon
-                x = droplist[i]
-                droplist[i] = droplist[j]
-                droplist[j] = x
-                y = Droptypes[i]
-                Droptypes[i] = Droptypes[j]
-                Droptypes[j] = y
-                z = dropbuy[i]
-                dropbuy[i] = dropbuy[j]
-                dropbuy[j] = z
-                q = dropsell[i]
-                dropsell[i] = dropsell[j]
-                dropsell[j] = q
-    for i in range(len(bestdrop)):
-        bestdrop[i]=Drops[i]
-        products[i+10]=Droptypes[i]
-    #### Best Drops ####
     #### Best Jerry ####
     print("\n \n \t \t \tCalculating Best jerry...")
-    jerrys = ["0","1","2","3"]
-    jerrytypes = ["Jerry green","Jerry blue","Jerry purple","Jerry gold"]
-    jerryjson = ["JERRY_BOX_GREEN","JERRY_BOX_BLUE","JERRY_BOX_PURPLE","JERRY_BOX_GOLDEN"]
-    bestjerry = ["0"]
-    jerrybuy = [0,1,2,3]
-    jerrysell = [0,1,2,3]
-    jerrylist = [0,1,2,3]
     for i in range(len(jerrys)):
-        jerrys[i] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId="+jerryjson[i]).json()
-    for i in range(len(jerrys)):
-        jerrybuy[i] = jerrys[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        jerrysell[i] = jerrys[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        jerrylist[i] = (float(jerrysell[i])-float(jerrybuy[i])-float(jerrysell[i])/100)/float(jerrybuy[i])*100
+        jerrybuy.append(json["products"][jerryjson[i]]["sell_summary"][0]["pricePerUnit"])
+        jerrysell.append(json["products"][jerryjson[i]]["buy_summary"][0]["pricePerUnit"])
+        jerrylist.append((float(jerrysell[i])-float(jerrybuy[i])-float(jerrysell[i])/100)/float(jerrybuy[i])*100)
     for i in range(len(jerrys)):
         for j in range(len(jerrys)):
-            if(jerrylist[i]<jerrylist[j]):
-                bestjerry = jerrys[j]
-                products[5] = jerrytypes[j]  
+            if(jerrylist[i]>jerrylist[j]):
+                ez = jerrylist[j]
+                jerrylist[j] = jerrylist[i]
+                jerrylist[i] = ez
+                ez = jerryjson[j]
+                jerryjson[j] = jerryjson[i]
+                jerryjson[i] = ez
+                ez = jerrys[j]
+                jerrys[j] = jerrys[i]
+                jerrys[i] = ez
+    bestjerry = jerryjson[0]
+    products.append(jerrys[0])  
     #### Best Jerry ####
     ### Best Super Enchanted ####
     print("\n \n \t \t \tCalculating Best 4 Other Items...")
-    Supers = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","15","16","17"]
-    Supertypes = ["Baked Potato","Golden Carrot","Sugar Cane","Coal Block","Gold Block","Lapis Block","Redstone Block","Glowstone Block","Packed Ice","Blaze Rod","Redstone Lamp","Compactor","Summoning Eye","Catalyst","White gift","Purple Candy","Grilled Pork","Refined Mineral","RECOMBOBULATOR","Booster Cookie","Ticket"]
-    bestsuper = ["0","1","2","3"]
-    superbuy = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
-    supersell = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1718,19,20,21]
-    Superlist = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1718,19,20,21]
-    supersjson = ["ENCHANTED_BAKED_POTATO","ENCHANTED_GOLDEN_CARROT","ENCHANTED_SUGAR_CANE","ENCHANTED_COAL_BLOCK","ENCHANTED_GOLD_BLOCK","ENCHANTED_LAPIS_LAZULI_BLOCK","ENCHANTED_REDSTONE_BLOCK","ENCHANTED_GLOWSTONE","ENCHANTED_PACKED_ICE","ENCHANTED_BLAZE_ROD","ENCHANTED_REDSTONE_LAMP","SUPER_COMPACTOR_3000","SUMMONING_EYE","CATALYST","WHITE_GIFT","PURPLE_CANDY","ENCHANTED_GRILLED_PORK","REFINED_MINERAL","RECOMBOBULATOR_3000","BOOSTER_COOKIE","JACOBS_TICKET"]   
-    for i in range(len(Supers)):
-        Supers[i] = requests.get("https://api.hypixel.net/skyblock/bazaar/product?key=7dd8f258-dac1-489c-a673-20a7522619a6&productId="+supersjson[i]).json()
-    for i in range(len(Supers)):
-        superbuy[i] = Supers[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        supersell[i] = Supers[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
-        Superlist[i] = (float(supersell[i])-float(superbuy[i])-float(supersell[i])/100)/float(superbuy[i])*100
-    for i in range(len(Supers)):
-        for j in range(len(Supers)):
-            if(Superlist[i]>Superlist[j]):
-                cumdemon = Supers[i]
-                Supers[i] = Supers[j]
-                Supers[j] = cumdemon
-                x = Superlist[i]
-                Superlist[i] = Superlist[j]
-                Superlist[j] = x
-                y = Supertypes[i]
-                Supertypes[i] = Supertypes[j]
-                Supertypes[j] = y
-                z = superbuy[i]
-                superbuy[i] = superbuy[j]
-                superbuy[j] = z
-                q = supersell[i]
-                supersell[i] = supersell[j]
-                supersell[j] = q
+    for i in range(len(supers)):
+        superbuy.append(json["products"][superjson[i]]["sell_summary"][0]["pricePerUnit"])
+        supersell.append(json["products"][superjson[i]]["buy_summary"][0]["pricePerUnit"])
+        superlist.append((float(supersell[i])-float(superbuy[i])-float(supersell[i])/100)/float(superbuy[i])*100)
+    for i in range(len(supers)):
+        for j in range(len(supers)):
+            if(superlist[i]>superlist[j]):
+                cumdemon = supers[i]
+                supers[i] = supers[j]
+                supers[j] = cumdemon
+                x = superlist[i]
+                superlist[i] = superlist[j]
+                superlist[j] = x
+                y = superjson[i]
+                superjson[i] = superjson[j]
+                superjson[j] = y
     for i in range(4):
-        bestsuper[i]=Supers[i]
-        products[i+6]=Supertypes[i]
+        bestsuper.append(superjson[i])
+        products.append(supers[i])
     #### Best Super Enchanted ####
+    ### Best Drops ####
+    print("\n \n \t \t \t  Calculating Best 2 Drops...")
+    for i in range(len(drops)):
+        dropbuy.append(json["products"][dropjson[i]]["sell_summary"][0]["pricePerUnit"])
+        dropsell.append(json["products"][dropjson[i]]["buy_summary"][0]["pricePerUnit"])
+        droplist.append((float(dropsell[i])-float(dropbuy[i])-float(dropsell[i])/100)/float(dropbuy[i])*100)
+    for i in range(len(drops)):
+        for j in range(len(drops)):
+            if(droplist[i]>droplist[j]):
+                cumdemon = drops[i]
+                drops[i] = drops[j]
+                drops[j] = cumdemon
+                x = droplist[i]
+                droplist[i] = droplist[j]
+                droplist[j] = x
+                y = dropjson[i]
+                dropjson[i] = dropjson[j]
+                dropjson[j] = y
+    for i in range(2):
+        bestdrop.append(dropjson[i])
+        products.append(drops[i])
+    #### Best Drops ####
+    #### Best Crops ####
+    print("\n \n \t \t \t  Calculating Best 2 Crops...")
+    for i in range(len(crops)):
+        cropbuy.append(json["products"][cropjson[i]]["sell_summary"][0]["pricePerUnit"])
+        cropsell.append(json["products"][cropjson[i]]["buy_summary"][0]["pricePerUnit"])
+        croplist.append((float(cropsell[i])-float(cropbuy[i])-float(cropsell[i])/100)/float(cropbuy[i])*100)
+    for i in range(len(crops)):
+        for j in range(len(crops)):
+            if(croplist[i]>croplist[j]):
+                cumdemon = crops[i]
+                crops[i] = crops[j]
+                crops[j] = cumdemon
+                x = croplist[i]
+                croplist[i] = croplist[j]
+                croplist[j] = x
+                y = cropjson[i]
+                cropjson[i] = cropjson[j]
+                cropjson[j] = y
+    for i in range(2):
+        bestcrop.append(cropjson[i])
+        products.append(crops[i])
+    #### Best Crops ####    
+    #### Best Slayer ####
+    print("\n \n \t \t \t Calculating Best Slayer Drop...")
+    for i in range(len(slayer)):
+        slayerbuy.append(json["products"][slayerjson[i]]["sell_summary"][0]["pricePerUnit"])
+        slayersell.append(json["products"][slayerjson[i]]["buy_summary"][0]["pricePerUnit"])
+        slayerlist.append((float(slayersell[i])-float(slayerbuy[i])-float(slayersell[i])/100)/float(slayerbuy[i])*100)
+    for i in range(len(slayer)):
+        for j in range(len(slayer)):
+            if(slayerlist[i]>slayerlist[j]):
+                cumdemon = slayer[i]
+                slayer[i] = slayer[j]
+                slayer[j] = cumdemon
+                x = slayerlist[i]
+                slayerlist[i] = slayerlist[j]
+                slayerlist[j] = x
+                y = slayerjson[i]
+                slayerjson[i] = slayerjson[j]
+                slayerjson[j] = y
+    bestslayer = slayerjson[0]
+    products.append(slayer[0])
+    #### Best Slayer ####
     #### Api requester ####
     print("\n \n \t \t \t  Extracting Data From Hypixel API... \n \n")
-    itemsdata[0] = bestwood
-    itemsdata[1] = bestore[0]
-    itemsdata[2] = bestore[1]
-    itemsdata[3] = bestore[2]
-    itemsdata[4] = bestore[3]
-    itemsdata[5] = bestjerry
-    itemsdata[6] = bestsuper[0]
-    itemsdata[7] = bestsuper[1]
-    itemsdata[8] = bestsuper[2]
-    itemsdata[9] = bestsuper[3]
-    itemsdata[10] = bestdrop[0]
-    itemsdata[11] = bestdrop[1]
-    itemsdata[12] = bestcrop[0]
-    itemsdata[13] = bestcrop[1]
-    itemsdata[14] = bestslayer
+    itemsdata.append(bestwood)
+    itemsdata.append(bestore[0])
+    itemsdata.append(bestore[1])
+    itemsdata.append(bestore[2])
+    itemsdata.append(bestore[3])
+    itemsdata.append(bestjerry)
+    itemsdata.append(bestsuper[0])
+    itemsdata.append(bestsuper[1])
+    itemsdata.append(bestsuper[2])
+    itemsdata.append(bestsuper[3])
+    itemsdata.append(bestdrop[0])
+    itemsdata.append(bestdrop[1])
+    itemsdata.append(bestcrop[0])
+    itemsdata.append(bestcrop[1])
+    itemsdata.append(bestslayer)
     #### API requester ####
     #### Bazaar data grabber ####
     for i in range(len(itemsdata)):
-        buy[i] = itemsdata[i]["product_info"]["buy_summary"][0]["pricePerUnit"]
-        sell[i] = itemsdata[i]["product_info"]["sell_summary"][0]["pricePerUnit"]
+        buy.append(json["products"][itemsdata[i]]["sell_summary"][0]["pricePerUnit"])
+        sell.append(json["products"][itemsdata[i]]["buy_summary"][0]["pricePerUnit"])
     #### Bazaar data grabber ####
     #### Best inizializator ####
     for i in range(len(itemsdata)):
-        best[i] = float(sell[i])-float(buy[i])-float(sell[i])/100
-        perc[i] = float(best[i])/float(buy[i])*100
+        best.append(float(sell[i])-float(buy[i])-float(sell[i])/100)
+        perc.append(float(best[i])/float(buy[i])*100)
     #### Best inizializator ####
     #### Best chooser ####
     for i in range(len(itemsdata)):
@@ -304,9 +255,9 @@ while(True):
                 sell[j] = q
     #### Best chooser ####
     #### Price List ####
+    for i in range(len(itemsdata)):
+        perc[i] = decimal.Decimal('%.1f' % (perc[i]))
     def ProfitList():
-        for i in range(len(itemsdata)):
-            percperc[i] = decimal.Decimal('%.1f' % (perc[i]))
         arraystringlist = ""
         for i in range(len(itemsdata)):
             arraystringlist += str(i+1)
@@ -319,7 +270,7 @@ while(True):
             arraystringlist += "sell("
             arraystringlist += str(sell[i])
             arraystringlist += ") : "
-            arraystringlist += str(percperc[i])
+            arraystringlist += str(perc[i])
             arraystringlist += "% \n \n"
         return arraystringlist
     print(ProfitList())
@@ -329,31 +280,26 @@ while(True):
     if(numberchungus == -1):
         print("\n---------------------------------------------------------------\n")
         continue
-    yourproduct = itemsdata[0]
-    yproduct = products[0]
-    for i in range(len(itemsdata)):
-        if(int(numberchungus)==i):
-            yproduct = products[i]
-            yourproduct = itemsdata[i]
+    yourproduct = itemsdata[numberchungus]
+    yproduct = products[numberchungus]
     print("product choosen: ",yproduct,"\n")
     finalproduct=yourproduct
     #### itemchooser ####
     #### Bazaar item data ####
     def bazaardatabuy():
-        bazaarHighetsPriceBuy = finalproduct["product_info"]["buy_summary"][0]["pricePerUnit"]
+        bazaarHighetsPriceBuy = json["products"][finalproduct]["sell_summary"][0]["pricePerUnit"]
         return bazaarHighetsPriceBuy
     def bazaardatasell():
-        bazaarLowestPriceSell = finalproduct["product_info"]["sell_summary"][0]["pricePerUnit"]
+        bazaarLowestPriceSell = json["products"][finalproduct]["buy_summary"][0]["pricePerUnit"]
         return bazaarLowestPriceSell
     #### Bazaar item data ####
 ####Bazaar Calculator ####
     #### Variables ####
-    bazaardatasell()
     bq = input("insert budget/quantity (0/1): ")
     if(bq == "0"):  
         budget = input("Enter budget: ")
         if(budget == "0"):  
-            budget = 2.5*(10**7)
+            budget = 1*(10**7)
             bazaarbuyin = "0"
             bazaarsellin = "0"
         else:
@@ -427,4 +373,5 @@ while(True):
     input()
     print("---------------------------------------------------------------\n")
     #### Printer ####
+    #mammt prima era 430 righe
 #### Bazaar Calculator ####
