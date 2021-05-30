@@ -4,7 +4,7 @@ import decimal
 
 
 while(True):
-    print("\n \t \t \t \t Attendere...")
+    print("\n  \n")
     #### Lists inizializator ####
     json = requests.get("https://api.hypixel.net/skyblock/bazaar?key=a7c61bba-d7ef-4049-8f42-bc53d6b8d747").json()
     woodjson = ["ENCHANTED_OAK_LOG","ENCHANTED_SPRUCE_LOG","ENCHANTED_BIRCH_LOG","ENCHANTED_DARK_OAK_LOG","ENCHANTED_JUNGLE_LOG","ENCHANTED_ACACIA_LOG"]
@@ -14,180 +14,49 @@ while(True):
     dropjson = ["ENCHANTED_ROTTEN_FLESH","ENCHANTED_BONE","ENCHANTED_STRING","ENCHANTED_ENDER_PEARL","ENCHANTED_BLAZE_POWDER","GRIFFIN_FEATHER","ENCHANTED_ANCIENT_CLAW","ENCHANTED_SHARK_FIN","GREAT_WHITE_SHARK_TOOTH"]
     cropjson = ["ENCHANTED_CARROT","ENCHANTED_POTATO","ENCHANTED_PUMPKIN","ENCHANTED_SUGAR","ENCHANTED_LEATHER","ENCHANTED_RABBIT_FOOT","ENCHANTED_RABBIT_HIDE","ENCHANTED_PORK","TIGHTLY_TIED_HAY_BALE","MUTANT_NETHER_STALK"]
     slayerjson = ["REVENANT_VISCERA","TARANTULA_SILK","WOLF_TOOTH","GOLDEN_TOOTH"]
-    wood = ["Oak","Spruce","Birch","Dark oak","Jungle","Acacia"]
+    woods = ["Oak","Spruce","Birch","Dark oak","Jungle","Acacia"]
     ores = ["Cobblestone","Coal","Iron","Gold","Redstone","Lapis","Diamond","Emerald","Obsidian","Flint","Glowstone","Ice","Quartz","Snow","Mithril","Starfall","Titanium"]
     jerrys = ["Jerry green","Jerry blue","Jerry purple","Jerry gold"]
     supers = ["Baked Potato","Golden Carrot","Sugar Cane","Coal Block","Gold Block","Lapis Block","Redstone Block","Glowstone Block","Packed Ice","Blaze Rod","Redstone Lamp","Compactor","Summoning Eye","Catalyst","White gift","Purple Candy","Grilled Pork","Refined Mineral","RECOMBOBULATOR","Booster Cookie","Ticket"]     
     drops = ["Rotten Flesh","Bone","String","Ender Pearl","Blaze Powder","Griffon","Claw","Shark Fin","White shark tooth"]
     crops = ["Carrot","Potato","Pumpkin","Sugar","Leather","Rabbit Foot","Rabbit Hide","Pork","Hay Bale","Mutant Wart"]
-    slayer = ["Viscera","Silk","Wolf Tooth","Golden Tooth"]
-    ### Empty ###
+    slayers = ["Viscera","Silk","Wolf Tooth","Golden Tooth"]
     products = []
     itemsdata = []
     perc = []
     buy = []
     sell = []
-    #perclist = ["wood"]["ores"]["jerry"]["super"]["drop"]["crop"]["slayer"] hihihi cocoriti im giorgio cappello di paglia https://www.youtube.com/watch?v=E9FvB_TOGUg
-    woodlist = []        
-    orelist = []
-    jerrylist = []       
-    superlist = []
-    droplist = []
-    croplist = []
-    slayerlist = []
-    ### Empty ###
     #### Lists iniziaalizator ####
-    #### Best Wood ####
-    print("\n \n \t \t \t Calculating Best Wood Type...")
-    for i in range(len(wood)):
-        theybuy = json["products"][woodjson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][woodjson[i]]["buy_summary"][0]["pricePerUnit"]
-        woodlist.append(((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy))*100)
-    for i in range(len(wood)):
-        for j in range(len(wood)):
-            if(woodlist[i]>woodlist[j]):
-                ez = woodlist[j]
-                woodlist[j] = woodlist[i]
-                woodlist[i] = ez
-                ez = woodjson[j]
-                woodjson[j] = woodjson[i]
-                woodjson[i] = ez
-                ez = wood[j]
-                wood[j] = wood[i]
-                wood[i] = ez
-    itemsdata.append(woodjson[0])
-    products.append(wood[0])
-    #### Best Wood ###
-    ####  Best Ores #####
-    print("\n \n \t \t \t  Calculating Best 4 Ores...")
-    for i in range(len(ores)):
-        theybuy = json["products"][orejson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][orejson[i]]["buy_summary"][0]["pricePerUnit"]
-        orelist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100) 
-    for i in range(len(ores)):
-        for j in range(len(ores)):
-            if(orelist[i]>orelist[j]):
-                cumdemon = ores[i]
-                ores[i] = ores[j]
-                ores[j] = cumdemon
-                x = orelist[i]
-                orelist[i] = orelist[j]
-                orelist[j] = x
-                y = orejson[i]
-                orejson[i] = orejson[j]
-                orejson[j] = y
-    for i in range(4):
-        itemsdata.append(orejson[i])
-        products.append(ores[i])
-    #### Best Ores #####
-    #### Best Jerry ####
-    print("\n \n \t \t \tCalculating Best jerry...")
-    for i in range(len(jerrys)):
-        theybuy = json["products"][jerryjson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][jerryjson[i]]["buy_summary"][0]["pricePerUnit"]
-        jerrylist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
-    for i in range(len(jerrys)):
-        for j in range(len(jerrys)):
-            if(jerrylist[i]>jerrylist[j]):
-                ez = jerrylist[j]
-                jerrylist[j] = jerrylist[i]
-                jerrylist[i] = ez
-                ez = jerryjson[j]
-                jerryjson[j] = jerryjson[i]
-                jerryjson[i] = ez
-                ez = jerrys[j]
-                jerrys[j] = jerrys[i]
-                jerrys[i] = ez
-    itemsdata.append(jerryjson[0])
-    products.append(jerrys[0])
-    #### Best Jerry ####
-    ### Best Super Enchanted ####
-    print("\n \n \t \t \tCalculating Best 4 Other Items...")
-    for i in range(len(supers)):
-        theybuy = json["products"][superjson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][superjson[i]]["buy_summary"][0]["pricePerUnit"]
-        superlist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
-    for i in range(len(supers)):
-        for j in range(len(supers)):
-            if(superlist[i]>superlist[j]):
-                cumdemon = supers[i]
-                supers[i] = supers[j]
-                supers[j] = cumdemon
-                x = superlist[i]
-                superlist[i] = superlist[j]
-                superlist[j] = x
-                y = superjson[i]
-                superjson[i] = superjson[j]
-                superjson[j] = y
-    for i in range(4):
-        itemsdata.append(superjson[i])
-        products.append(supers[i])
-    #### Best Super Enchanted ####
-    ### Best Drops ####
-    print("\n \n \t \t \t  Calculating Best 2 Drops...")
-    for i in range(len(drops)):
-        theybuy = json["products"][dropjson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][dropjson[i]]["buy_summary"][0]["pricePerUnit"]
-        droplist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
-    for i in range(len(drops)):
-        for j in range(len(drops)):
-            if(droplist[i]>droplist[j]):
-                cumdemon = drops[i]
-                drops[i] = drops[j]
-                drops[j] = cumdemon
-                x = droplist[i]
-                droplist[i] = droplist[j]
-                droplist[j] = x
-                y = dropjson[i]
-                dropjson[i] = dropjson[j]
-                dropjson[j] = y
-    for i in range(2):
-        itemsdata.append(dropjson[i])
-        products.append(drops[i])
-    #### Best Drops ####
-    #### Best Crops ####
-    print("\n \n \t \t \t  Calculating Best 2 Crops...")
-    for i in range(len(crops)):
-        theybuy = json["products"][cropjson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][cropjson[i]]["buy_summary"][0]["pricePerUnit"]
-        croplist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
-    for i in range(len(crops)):
-        for j in range(len(crops)):
-            if(croplist[i]>croplist[j]):
-                cumdemon = crops[i]
-                crops[i] = crops[j]
-                crops[j] = cumdemon
-                x = croplist[i]
-                croplist[i] = croplist[j]
-                croplist[j] = x
-                y = cropjson[i]
-                cropjson[i] = cropjson[j]
-                cropjson[j] = y
-    for i in range(2):
-        itemsdata.append(cropjson[i])
-        products.append(crops[i])
-    #### Best Crops ####    
-    #### Best Slayer ####
-    print("\n \n \t \t \t Calculating Best Slayer Drop... \n \n")
-    for i in range(len(slayer)):
-        theybuy = json["products"][slayerjson[i]]["sell_summary"][0]["pricePerUnit"]
-        isell = json["products"][slayerjson[i]]["buy_summary"][0]["pricePerUnit"]
-        slayerlist.append((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy)*100)
-    for i in range(len(slayer)):
-        for j in range(len(slayer)):
-            if(slayerlist[i]>slayerlist[j]):
-                cumdemon = slayer[i]
-                slayer[i] = slayer[j]
-                slayer[j] = cumdemon
-                x = slayerlist[i]
-                slayerlist[i] = slayerlist[j]
-                slayerlist[j] = x
-                y = slayerjson[i]
-                slayerjson[i] = slayerjson[j]
-                slayerjson[j] = y
-    itemsdata.append(slayerjson[0])
-    products.append(slayer[0])
-    #### Best Slayer ####
+    #### Mammt Simulator ####
+    def BestCalculator(itemjson,item, n):
+        percentage = []
+        for i in range(len(itemjson)):
+            theybuy = json["products"][itemjson[i]]["sell_summary"][0]["pricePerUnit"]
+            isell = json["products"][itemjson[i]]["buy_summary"][0]["pricePerUnit"]
+            percentage.append(((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy))*100)
+        for i in range(len(itemjson)):
+            for j in range(len(itemjson)):
+                if(percentage[i]>percentage[j]):
+                    cumdemon = percentage[i]
+                    percentage[i] = percentage[j]
+                    percentage[j] = cumdemon
+                    cumdemon = itemjson[i]
+                    itemjson[i] = itemjson[j]
+                    itemjson[j] = cumdemon
+                    cumdemon = item[i]
+                    item[i] = item[j]
+                    item[j] = cumdemon
+        for i in range(n):
+            itemsdata.append(itemjson[i])
+            products.append(item[i])
+    BestCalculator(woodjson,woods,1)
+    BestCalculator(orejson,ores,4)
+    BestCalculator(jerryjson,jerrys,1)
+    BestCalculator(superjson,supers,4)
+    BestCalculator(dropjson,drops,2)
+    BestCalculator(cropjson,crops,2)
+    BestCalculator(slayerjson,slayers,1)
+    #### Mammt Simulator ####
     #### Bazaar data grabber ####
     for i in range(len(itemsdata)):
         buy.append(json["products"][itemsdata[i]]["sell_summary"][0]["pricePerUnit"])
@@ -338,5 +207,6 @@ while(True):
     input()
     print("---------------------------------------------------------------\n")
     #### Printer ####
-    #mammt prima era 430 righe
 #### Bazaar Calculator ####
+
+#mammt prima era 340 righe
