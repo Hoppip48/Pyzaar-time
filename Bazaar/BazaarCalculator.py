@@ -23,17 +23,16 @@ while(True):
     slayers = ["Viscera","Silk","Wolf Tooth","Golden Tooth"]
     products = []
     itemsdata = []
-    perc = []
-    buy = []
-    sell = []
     #### Lists iniziaalizator ####
     #### Mammt Simulator ####
-    def BestCalculator(itemjson,item, n):
+    def BestCalculator(itemjson,item, n, b):
         percentage = []
+        buy = []
+        sell = []
         for i in range(len(itemjson)):
-            theybuy = json["products"][itemjson[i]]["sell_summary"][0]["pricePerUnit"]
-            isell = json["products"][itemjson[i]]["buy_summary"][0]["pricePerUnit"]
-            percentage.append(((float(isell)-float(theybuy)-float(isell)/100)/float(theybuy))*100)
+            buy.append(json["products"][itemjson[i]]["sell_summary"][0]["pricePerUnit"])
+            sell.append(json["products"][itemjson[i]]["buy_summary"][0]["pricePerUnit"])
+            percentage.append(((float(sell[i])-float(buy[i])-float(sell[i])/100)/float(buy[i]))*100)
         for i in range(len(itemjson)):
             for j in range(len(itemjson)):
                 if(percentage[i]>percentage[j]):
@@ -46,53 +45,22 @@ while(True):
                     cumdemon = item[i]
                     item[i] = item[j]
                     item[j] = cumdemon
+                    cumdemon = buy[i]
+                    buy[i] = buy[j]
+                    buy[j] = cumdemon
+                    cumdemon = sell[i]
+                    sell[i] = sell[j]
+                    sell[j] = cumdemon
+        if(b):
+            ProfitList(item, buy, sell, percentage)
         for i in range(n):
             itemsdata.append(itemjson[i])
             products.append(item[i])
-    BestCalculator(woodjson,woods,1)
-    BestCalculator(orejson,ores,4)
-    BestCalculator(jerryjson,jerrys,1)
-    BestCalculator(superjson,supers,4)
-    BestCalculator(dropjson,drops,2)
-    BestCalculator(cropjson,crops,2)
-    BestCalculator(slayerjson,slayers,1)
     #### Mammt Simulator ####
-    #### Bazaar data grabber ####
-    for i in range(len(itemsdata)):
-        buy.append(json["products"][itemsdata[i]]["sell_summary"][0]["pricePerUnit"])
-        sell.append(json["products"][itemsdata[i]]["buy_summary"][0]["pricePerUnit"])
-    #### Bazaar data grabber ####
-    #### Best inizializator ####
-    for i in range(len(itemsdata)):
-        ez = float(sell[i])-float(buy[i])-float(sell[i])/100
-        perc.append(float(ez)/float(buy[i])*100)
-    #### Best inizializator ####
-    #### Best chooser ####
-    for i in range(len(itemsdata)):
-        for j in range(len(itemsdata)):
-            if(perc[i]>perc[j]):
-                cumdemon = itemsdata[i]
-                itemsdata[i] = itemsdata[j]
-                itemsdata[j] = cumdemon
-                x = perc[i]
-                perc[i] = perc[j]
-                perc[j] = x
-                y = products[i]
-                products[i] = products[j]
-                products[j] = y
-                z = buy[i]
-                buy[i] = buy[j]
-                buy[j] = z
-                q = sell[i]
-                sell[i] = sell[j]
-                sell[j] = q
-    #### Best chooser ####
     #### Price List ####
-    for i in range(len(itemsdata)):
-        perc[i] = decimal.Decimal('%.1f' % (perc[i]))
-    def ProfitList():
+    def ProfitList(products, buy, sell, percentage):
         arraystringlist = ""
-        for i in range(len(itemsdata)):
+        for i in range(len(products)):
             arraystringlist += str(i+1)
             arraystringlist += ") "
             arraystringlist += str(products[i])
@@ -103,110 +71,101 @@ while(True):
             arraystringlist += "sell("
             arraystringlist += str(sell[i])
             arraystringlist += ") | "
-            arraystringlist += str(perc[i])
+            arraystringlist += str(decimal.Decimal('%.1f' % (percentage[i])))
             arraystringlist += "% \n \n"
             #arraystringlist +=  popolarità ,"\n \n"
-        return arraystringlist
-    print(ProfitList())
+        print(arraystringlist)
     #### Price List ####
+    #### Cat Calling ####
+    BestCalculator(woodjson,woods,1,False)
+    BestCalculator(orejson,ores,4,False)
+    BestCalculator(jerryjson,jerrys,1,False)
+    BestCalculator(superjson,supers,4,False)
+    BestCalculator(dropjson,drops,2,False,)
+    BestCalculator(cropjson,crops,2,False)
+    BestCalculator(slayerjson,slayers,1,False)
+    BestCalculator(itemsdata, products,0,True)
+    #### Cat Calling ####
     #### itemchooser ####
     numberchungus = int(input("choose item number: "))-1    
     if(numberchungus == -1):
         print("\n---------------------------------------------------------------\n")
         continue
-    yourproduct = itemsdata[numberchungus]
-    yproduct = products[numberchungus]
-    print("product choosen: ",yproduct,"\n")
-    finalproduct=yourproduct
-    #### itemchooser ####
-    #### Bazaar item data ####
+    productjson = itemsdata[numberchungus]
+    product = products[numberchungus]
+    print("product choosen: ",product,"\n")
     def bazaardatabuy():
-        bazaarHighetsPriceBuy = json["products"][finalproduct]["sell_summary"][0]["pricePerUnit"]
+        bazaarHighetsPriceBuy = json["products"][productjson]["sell_summary"][0]["pricePerUnit"]
         return bazaarHighetsPriceBuy
     def bazaardatasell():
-        bazaarLowestPriceSell = json["products"][finalproduct]["buy_summary"][0]["pricePerUnit"]
+        bazaarLowestPriceSell = json["products"][productjson]["buy_summary"][0]["pricePerUnit"]
         return bazaarLowestPriceSell
-    #### Bazaar item data ####
-####Bazaar Calculator ####
+    #### itemchooser ####
+#### Bazaar Calculator ####
     #### Variables ####
     bq = input("insert budget/quantity (0/1): ")
     if(bq == "0"):  
         budget = input("Enter budget: ")
         if(budget == "0"):  
-            budget = 1*(10**7)
-            bazaarbuyin = "0"
-            bazaarsellin = "0"
+            budget = 2*(10**7)
+            bazaarbuy = "0"
+            bazaarsell = "0"
         else:
-            bazaarbuyin = input("Enter buy price: ")
-            bazaarsellin = input("Enter sell price: ")
+            bazaarbuy = input("Enter buy price: ")
+            bazaarsell = input("Enter sell price: ")
     else:
         quantità = input("Enter quantity: ")
         if(quantità == "0"):  
             quantità = 1024
-            bazaarbuyin = "0"
-            bazaarsellin = "0"
+            bazaarbuy = "0"
+            bazaarsell = "0"
         else:
-            bazaarbuyin = input("Enter buy price: ")
-            bazaarsellin = input("Enter sell price: ")
+            bazaarbuy = input("Enter buy price: ")
+            bazaarsell = input("Enter sell price: ")
     print("\n")
-    if(bazaarbuyin == "0"):
+    if(bazaarbuy == "0"):
         bazaarbuy = float(bazaardatabuy())+0.1
-    else:
-        bazaarbuy = float(bazaarbuyin)
-    if(bazaarsellin == "0"):
+    if(bazaarsell == "0"):
         bazaarsell = float(bazaardatasell())-0.1
-    else:
-        bazaarsell = float(bazaarsellin)
-    decimalbuy = decimal.Decimal('%.1f' % (bazaarbuy))
-    decimalsell = decimal.Decimal('%.1f' % (bazaarsell))
+    #### Variables ####
     #### Calculator ####
     if(bq=="0"):
         quantità = int(float(budget)/float(bazaarbuy))
     else:
         budget = float(quantità)*float(bazaarbuy)
-    if(float(budget) > 10**3 and float(budget) < 10^6):
-        stringbudget = str(int(int(budget)/10**3))+"k"
-    elif(float(budget) > 10**6):
-        stringbudget = str(int(int(budget)/10**6))+"M"
-    else:
-        stringbudget = budget
     buytot = float(bazaarbuy)*float(quantità)
     selltot = float(bazaarsell)*float(quantità)
     tasse = float(selltot)/100
     bazaarguadagno = float(selltot) - float(buytot) - float(tasse)
     percentuale = float(bazaarguadagno)/float(budget)*100
     minvendita =  float(bazaarbuy) + float(bazaarbuy)/99
-    #### decimal-inator ####
-    decimalbuytot = decimal.Decimal('%.1f' % (buytot))
-    decimalselltot = decimal.Decimal('%.1f' % (selltot))
-    decimaltasse = decimal.Decimal('%.1f' % (tasse))
-    decimalbazaarguadagno = decimal.Decimal('%.1f' % (bazaarguadagno))
-    decimalpercentuale = decimal.Decimal('%.1f' % (percentuale))
-    decimalminvendita = decimal.Decimal('%.1f' % (minvendita))
+    if(float(budget) > 10**3 and float(budget) < 10^6):
+        budget = str(int(int(budget)/10**3))+"k"
+    elif(float(budget) > 10**6):
+        budget = str(int(int(budget)/10**6))+"M"
+    #### Calculator ####
     #### Printer ####
     def printbazaar():
-        if(bazaarbuyin == "0" or bazaarsellin == "0"):
-            print("\nbuy price: ", decimalbuy)
-            print("sell price: ", decimalsell,"\n")
+        print("\nbuy price: ", decimal.Decimal('%.1f' % (bazaarbuy)))
+        print("sell price: ", decimal.Decimal('%.1f' % (bazaarsell)),"\n")
         if(int(quantità)>1024):
             print("quantità troppo elevata, ci potrebbe volere troppo per riceverlo","\n")
         if(bq=="0"):
-            print("quantità per arrivare a", stringbudget,": ", quantità,"\n")
+            print("quantità per arrivare a", budget,": ", quantità,"\n")
         else:
-            print("prezzo per arrivare a",quantità,": ", stringbudget,"\n")
-        print("minimo prezzo per vendere: ", decimalminvendita,"\n")
-        print("taxes: ", decimaltasse,"\n")
-        print("total buy: ", float(decimalbuytot),"\n")
+            print("prezzo per arrivare a",quantità,": ", budget,"\n")
+        print("minimo prezzo per vendere: ", decimal.Decimal('%.1f' % (minvendita)),"\n")
+        print("taxes: ", decimal.Decimal('%.1f' % (tasse)),"\n")
+        print("spesa totale: ", float(decimal.Decimal('%.1f' % (buytot))),"\n")
         if(bazaarguadagno > 0):
-            print("guadagno totale: ", decimalselltot,"\n")
-            print("guadagno effettivo: ", decimalbazaarguadagno,"\n")
+            print("guadagno totale: ", decimal.Decimal('%.1f' % (selltot)),"\n")
+            print("guadagno effettivo: ", decimal.Decimal('%.1f' % (bazaarguadagno)),"\n")
         else:
-            print("not stonks (", decimalbazaarguadagno,")","\n") 
+            print("not stonks (", decimal.Decimal('%.1f' % (bazaarguadagno)),")","\n") 
     printbazaar()
-    print("percentuale di guadagno rispetto al budget: ", decimalpercentuale,"%")
+    print("percentuale di guadagno rispetto al budget: ", decimal.Decimal('%.1f' % (percentuale)),"%")
     input()
     print("---------------------------------------------------------------\n")
     #### Printer ####
 #### Bazaar Calculator ####
-
-#mammt prima era 340 righe
+    #mammt prima era 430 righe, poi 340, poi 210, ora 170. ez
